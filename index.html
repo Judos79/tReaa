@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Preguntas de Administracion</title>
+    <link rel="icon" href="https://static.wixstatic.com/media/856f7c_781bcb193c324dc599de7f687c7483ea~mv2.png/v1/fit/w_2500,h_1330,al_c/856f7c_781bcb193c324dc599de7f687c7483ea~mv2.png" type="image/x-icon">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+
+        .quiz-container {
+            width: 400px;
+            margin: 0 auto;
+            background-color: #f5f5f5;
+            padding: 20px;
+            border: 1px solid #ccc;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .question {
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+
+        .answer {
+            display: inline-block;
+            margin: 5px;
+            padding: 10px 20px;
+            background-color: #3498db;
+            color: #fff;
+            cursor: pointer;
+            border: none;
+        }
+
+        .answer:hover {
+            background-color: #2980b9;
+        }
+
+        #result {
+            font-size: 24px;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="quiz-container">
+        <h1>Juego de Preguntas</h1>
+        <p class="question" id="question"></p>
+        <button class="answer" id="choiceA"></button>
+        <button class="answer" id="choiceB"></button>
+        <button class="answer" id="choiceC"></button>
+        <button class="answer" id="choiceD"></button>
+        <p id="result"></p>
+    </div>
+
+    <script>
+        const questions = [
+            {
+                question: "¿Cuál es el propósito principal del proceso de registro de clientes?",
+                choices: ["El propósito es recopilar información sobre los clientes", "analisis de mercado", "productos o servicios", " recursos y esfuerzos"],
+                correct: "El propósito es recopilar información sobre los clientes"
+            },
+            {
+                question1: "¿Qué sucede si el proceso de facturación se realiza de manera incorrecta o se omite?",
+                choices: ["Proporcionando un registro y una fecha límite de pago", "Generar y enviar facturas a los clientes", "Pérdida de ingresos y problemas con los clientes", "Garantizar que los clientes paguen por lo recibido"],
+                correct: "Pérdida de ingresos y problemas con los clientes"
+            },
+            {
+                question: "¿Cuáles son los posibles resultados de no tener un control adecuado del inventario?",
+                choices: ["Elefante", "Pérdida de ventas y costos adicionales.", "Se genera malos tratos", "Escazes de productos "],
+                correct: "Pérdida de ventas y costos adicionales."
+            },
+
+        ];
+
+        let currentQuestion = 0;
+        let score = 0;
+
+        function displayQuestion() {
+            const questionElement = document.getElementById("question");
+            const choiceA = document.getElementById("choiceA");
+            const choiceB = document.getElementById("choiceB");
+            const choiceC = document.getElementById("choiceC");
+            const choiceD = document.getElementById("choiceD");
+
+            if (currentQuestion < questions.length) {
+                const q = questions[currentQuestion];
+                questionElement.textContent = q.question;
+                choiceA.textContent = q.choices[0];
+                choiceB.textContent = q.choices[1];
+                choiceC.textContent = q.choices[2];
+                choiceD.textContent = q.choices[3];
+            } else {
+                questionElement.textContent = "¡Juego terminado!";
+                choiceA.style.display = "none";
+                choiceB.style.display = "none";
+                choiceC.style.display = "none";
+                choiceD.style.display = "none";
+                document.getElementById("result").textContent = `Puntuación: ${score} de ${questions.length}`;
+            }
+        }
+
+        function checkAnswer(answer) {
+            if (answer === questions[currentQuestion].correct) {
+                score++;
+            }
+            currentQuestion++;
+            displayQuestion();
+        }
+
+        displayQuestion();
+
+        document.getElementById("choiceA").addEventListener("click", () => checkAnswer(questions[currentQuestion].choices[0]));
+        document.getElementById("choiceB").addEventListener("click", () => checkAnswer(questions[currentQuestion].choices[1]));
+        document.getElementById("choiceC").addEventListener("click", () => checkAnswer(questions[currentQuestion].choices[2]));
+        document.getElementById("choiceD").addEventListener("click", () => checkAnswer(questions[currentQuestion].choices[3]));
+    </script>
+</body>
+</html>
